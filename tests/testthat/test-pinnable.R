@@ -8,7 +8,7 @@ describe("pinnable()", {
 
 describe("prepare(pinnable)", {
   iris_pinnable <- pinnable(
-    prepare = function() datasets::iris
+    prepare_fn = function() datasets::iris
   )
 
   it("creates a new `pinnable` with a `data` entry", {
