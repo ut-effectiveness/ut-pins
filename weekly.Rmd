@@ -8,3 +8,14 @@ resource_files:
 - sql/*
 - data/*
 ---
+
+```{r load_packages}
+```
+
+```{r load_functions}
+pkgload::load_all()
+```
+
+```{r setup_pins_environment}
+pin_board <- get_pins_board()
+```
