@@ -35,3 +35,25 @@ describe("prepare(pinnable)", {
     expect_is(prepared_pin$prep_end, "POSIXct")
   })
 })
+
+describe("publish(pinnable)", {
+  it("writes 'data' to the 'pin_name' pin", {
+    pin_name <- "numbers"
+    pin_board <- pins::board_temp()
+
+    numbers_pinnable <- pinnable(
+      pin_name = pin_name,
+      pin_board = pin_board,
+      prepare_fn = function() rnorm(10)
+    )
+
+    prepared_pin <- prepare(numbers_pinnable)
+    published_pin <- publish(prepared_pin)
+
+    stored_numbers <- pins::pin_read(pin_board, pin_name)
+    expect_equal(
+      stored_numbers,
+      prepared_pin$data
+    )
+  })
+})
