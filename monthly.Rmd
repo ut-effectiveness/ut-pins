@@ -1,0 +1,10 @@
+---
+title: "Scheduled Pins (Monthly)"
+author: ""
+date: ""
+output: html_document
+resource_files:
+- R/*
+- sql/*
+- data/*
+---
