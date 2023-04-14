@@ -3,10 +3,13 @@ cre
 gpl
 mit
 ORCID
+pkgload
 pre
 Pre
 README
 Roxygen
 RoxygenNote
 rstudio
+testthat
 utPins
+withr
