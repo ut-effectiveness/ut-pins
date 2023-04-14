@@ -16,7 +16,7 @@ get_pins_board <- function(setting = c("prod", "test")) {
 
   api_key <- get_pins_api_key()
 
-  pins::board_rsconnect(
+  pins::board_connect(
     auth = "manual",
     account = "***REMOVED***",
     server = "***REMOVED***",
