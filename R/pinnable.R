@@ -21,6 +21,9 @@ prepare.default <- function(x) {
 
 #' @export
 prepare.pinnable <- function(x) {
+  x$prep_start <- Sys.time()
   x$data <- x$prepare_fn()
-  x
+  x$prep_end <- Sys.time()
+
+  return(x)
 }

@@ -7,17 +7,31 @@ describe("pinnable()", {
 })
 
 describe("prepare(pinnable)", {
-  it("creates a new `pinnable` with a `data` entry", {
-    p <- pinnable(
-      prepare = function() datasets::iris
-    )
+  iris_pinnable <- pinnable(
+    prepare = function() datasets::iris
+  )
 
+  it("creates a new `pinnable` with a `data` entry", {
+    prepared_pin <- prepare(iris_pinnable)
     expect_true(
-      "data" %in% names(prepare(p))
+      "data" %in% names(prepared_pin)
     )
     expect_equal(
-      prepare(p)$data,
+      prepared_pin$data,
       datasets::iris
     )
+  })
+
+  it("appends start and end time of data-prep to the pinnable", {
+    prepared_pin <- prepare(iris_pinnable)
+    expect_true(
+      "prep_start" %in% names(prepared_pin)
+    )
+    expect_is(prepared_pin$prep_start, "POSIXct")
+
+    expect_true(
+      "prep_end" %in% names(prepared_pin)
+    )
+    expect_is(prepared_pin$prep_end, "POSIXct")
   })
 })
