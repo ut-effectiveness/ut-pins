@@ -12,4 +12,3 @@ Pins allow you to publish data sets, models, and other R objects.  More informat
 - Create audit logs of start time and end time and display how long each pin takes to process and complete.
 - Create error logs that will help in troubleshooting pins when errors do occur.
 - Ensure that connections to pins can be accessed both locally and by the server
-
