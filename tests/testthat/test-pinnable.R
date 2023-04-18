@@ -56,4 +56,21 @@ describe("publish(pinnable)", {
       prepared_pin$data
     )
   })
+  it("throws an error if 'data' does not exist", {
+    pin_name <- "letters"
+    pin_board <- pins::board_temp()
+
+    letters_pinnable <- pinnable(
+      pin_name = pin_name,
+      pin_board = pin_board
+    )
+
+    if ("data" %in% names(letters_pinnable)) {
+      stop("'data' entry should not exist in this test")
+    }
+
+    expect_error(
+      publish(letters_pinnable)
+    )
+  })
 })

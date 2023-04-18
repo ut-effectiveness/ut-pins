@@ -50,7 +50,9 @@ publish.default <- function(x) {
 
 #' @export
 publish.pinnable <- function(x) {
+  stopifnot("data" %in% names(x))
   data <- x$data
+
   pins::pin_write(
     board = x$pin_board,
     x = data,
