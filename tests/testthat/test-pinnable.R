@@ -74,3 +74,27 @@ describe("publish(pinnable)", {
     )
   })
 })
+
+describe("assert_publishable", {
+  it("breaks if pin board is not defined", {
+    no_board <- pinnable(
+      pin_name = "letters",
+      pin_type = "rds",
+      prepare_fn = function() letters
+    )
+    no_board <- prepare(no_board)
+
+    expect_error(assert_publishable(no_board))
+  })
+
+  it("breaks if pin name is not defined", {
+    no_name <- pinnable(
+      pin_board = pins::board_temp(),
+      pin_type = "rds",
+      prepare_fn = function() letters
+    )
+    no_name <- prepare(no_name)
+
+    expect_error(assert_publishable(no_name))
+  })
+})

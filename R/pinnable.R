@@ -50,7 +50,8 @@ publish.default <- function(x) {
 
 #' @export
 publish.pinnable <- function(x) {
-  stopifnot("data" %in% names(x))
+  assert_publishable(x)
+
   data <- x$data
 
   pins::pin_write(
@@ -59,4 +60,11 @@ publish.pinnable <- function(x) {
     name = x$pin_name,
     type = x$pin_type
   )
+}
+
+assert_publishable <- function(x) {
+  stopifnot(is(x, "pinnable"))
+  stopifnot("data" %in% names(x))
+  stopifnot("pin_name" %in% names(x) && !is.null(x$pin_name))
+  stopifnot("pin_board" %in% names(x) && is(x$pin_board, "pins_board"))
 }
