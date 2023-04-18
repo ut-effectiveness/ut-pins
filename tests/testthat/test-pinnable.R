@@ -37,7 +37,7 @@ describe("prepare(pinnable)", {
 })
 
 describe("publish(pinnable)", {
-  it("writes 'data' to the 'pin_name' pin", {
+  describe("on writing 'data' to the 'pin_name' pin", {
     pin_name <- "numbers"
     pin_board <- pins::board_temp()
 
@@ -50,12 +50,21 @@ describe("publish(pinnable)", {
     prepared_pin <- prepare(numbers_pinnable)
     published_pin <- publish(prepared_pin)
 
-    stored_numbers <- pins::pin_read(pin_board, pin_name)
-    expect_equal(
-      stored_numbers,
-      prepared_pin$data
-    )
+    it("returns the pinnable object", {
+      expect_is(published_pin, "pinnable")
+    })
+    it("appends the pin_path to the pinnable", {
+      expect_equal(published_pin$pin_path, pin_name)
+    })
+    it("creates a pin that can be read back", {
+      stored_numbers <- pins::pin_read(
+        published_pin$pin_board,
+        published_pin$pin_path
+      )
+      expect_equal(stored_numbers, prepared_pin$data)
+    })
   })
+
   it("throws an error if 'data' does not exist", {
     pin_name <- "letters"
     pin_board <- pins::board_temp()

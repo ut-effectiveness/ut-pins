@@ -52,14 +52,15 @@ publish.default <- function(x) {
 publish.pinnable <- function(x) {
   assert_publishable(x)
 
-  data <- x$data
-
-  pins::pin_write(
+  pin_path <- pins::pin_write(
     board = x$pin_board,
-    x = data,
+    x = x$data,
     name = x$pin_name,
     type = x$pin_type
   )
+
+  x$pin_path <- pin_path
+  x
 }
 
 assert_publishable <- function(x) {
