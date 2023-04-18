@@ -1,15 +1,13 @@
 pinnable <- function(prepare_fn = NULL,
                      pin_board = NULL,
                      pin_name = NULL,
-                     pin_type = "rds",
-                     verbose = FALSE) {
+                     pin_type = "rds") {
   structure(
     list(
       prepare_fn = prepare_fn,
       pin_board = pin_board,
       pin_name = pin_name,
-      pin_type = pin_type,
-      verbose = verbose
+      pin_type = pin_type
     ),
     class = "pinnable"
   )
