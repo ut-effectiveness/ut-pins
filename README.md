@@ -12,3 +12,23 @@ Pins allow you to publish data sets, models, and other R objects.  More informat
 - Create audit logs of start time and end time and display how long each pin takes to process and complete.
 - Create error logs that will help in troubleshooting pins when errors do occur.
 - Ensure that connections to pins can be accessed both locally and by the server
+
+## Development notes:
+Pre-commit hooks have been added to the project to help maintain a consistent style, create
+documentation and to check various other issues (spelling, committing of large files). Each
+developer would have to set up the pre-commit hooks on their own machine, so these are
+non-obligatory tools.
+
+If you would like to use the pre-commit hooks, you will first need to install:
+
+- the python `pre-commit` tool [Installation notes](https://pre-commit.com/#install)
+- the R package `{precommit}` [CRAN Link](https://cran.rstudio.com/web/packages/precommit/index.html)
+
+With those two tools in place, you can run:
+
+- `precommit::use_precommit()` in R, or
+- `pre-commit install --install-hooks` from the command line (in the {utPins} root directory)
+
+When calling `git commit ...` the hooks will run, and if any changes are made to, or any errors are
+found in, the committed files then the commit will not be made. You will have to `git add ...`
+the files again (after fixing any issues).
