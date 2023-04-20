@@ -1,3 +1,12 @@
+#' S3 class for generating/storing pin preparation/publishing details
+#'
+#' @param   prepare_fn   Function for preparing the data that will be stored in the associated pin.
+#' @param   pin_board   Board where the pin will be written.
+#' @param   pin_name   Name of the pin.
+#' @param   pin_type   Storage type for the pin (must be a format usable by `pin_write`).
+#'
+#' @export
+
 pinnable <- function(prepare_fn = NULL,
                      pin_board = NULL,
                      pin_name = NULL,
