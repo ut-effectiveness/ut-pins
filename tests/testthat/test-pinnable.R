@@ -84,6 +84,29 @@ describe("publish(pinnable)", {
   })
 })
 
+describe("publish(verbose_pinnable)", {
+  it("uses verbose HTTP output when calling pin_write", {
+    # GIVEN: a verbose_pinnable object that contains a 'data' element
+    pin_name <- "beatles"
+    pin_board <- pins::board_temp()
+
+    beatles_pinnable <- verbose_pinnable(
+      pin_name = pin_name,
+      pin_board = pin_board,
+      prepare_fn = function() c("John", "Paul", "George", "Ringo")
+    ) %>%
+      prepare()
+
+    # WHEN: publish() is called and the pin is written
+    mock_httr <- mockery::mock(TRUE)
+    mockery::stub(publish.verbose_pinnable, "httr::with_verbose", mock_httr)
+    publish(beatles_pinnable)
+
+    # THEN: verbose HTTP output is created using httr::with_verbose
+    mockery::expect_called(mock_httr, 1)
+  })
+})
+
 describe("assert_publishable", {
   it("breaks if pin board is not defined", {
     no_board <- pinnable(

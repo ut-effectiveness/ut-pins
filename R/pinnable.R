@@ -22,6 +22,27 @@ pinnable <- function(prepare_fn = NULL,
   )
 }
 
+#' S3 class for generating/storing pin preparation/publishing details
+#'
+#' When publishing using `pin_write`, this class will output verbose HTTP details.
+#'
+#' @inheritParams   pinnable
+#' @export
+
+verbose_pinnable <- function(prepare_fn = NULL,
+                             pin_board = NULL,
+                             pin_name = NULL,
+                             pin_type = "rds") {
+  p <- pinnable(
+    prepare_fn = prepare_fn,
+    pin_board = pin_board,
+    pin_name = pin_name,
+    pin_type = pin_type
+  )
+  class(p) <- c("verbose_pinnable", class(p))
+  p
+}
+
 #' Prepare a dataset for publication to pins
 #'
 #' @param   x   An object to be published. Typically a `pinnable` object for writing a pin to a
@@ -74,6 +95,17 @@ publish.pinnable <- function(x) {
 
   x$pin_path <- pin_path
   x
+}
+
+#' @export
+publish.verbose_pinnable <- function(x) {
+  httr::with_verbose(
+    data_out = TRUE,
+    data_in = TRUE,
+    info = TRUE,
+    ssl = TRUE,
+    expr = publish.pinnable(x)
+  )
 }
 
 assert_publishable <- function(x) {
