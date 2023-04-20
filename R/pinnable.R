@@ -109,8 +109,8 @@ publish.verbose_pinnable <- function(x) {
 }
 
 assert_publishable <- function(x) {
-  stopifnot(is(x, "pinnable"))
+  stopifnot(inherits(x, "pinnable"))
   stopifnot("data" %in% names(x))
   stopifnot("pin_name" %in% names(x) && !is.null(x$pin_name))
-  stopifnot("pin_board" %in% names(x) && is(x$pin_board, "pins_board"))
+  stopifnot("pin_board" %in% names(x) && inherits(x$pin_board, "pins_board"))
 }
