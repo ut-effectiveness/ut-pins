@@ -3,6 +3,7 @@ aut
 cre
 dplyr
 gpl
+httr
 LazyData
 magrittr
 mit
