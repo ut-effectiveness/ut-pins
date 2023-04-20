@@ -24,6 +24,9 @@ pinnable <- function(prepare_fn = NULL,
 
 #' Prepare a dataset for publication to pins
 #'
+#' @param   x   An object to be published. Typically a `pinnable` object for writing a pin to a
+#'   pins board.
+#'
 #' @export
 prepare <- function(x) {
   UseMethod("prepare")
@@ -44,6 +47,9 @@ prepare.pinnable <- function(x) {
 }
 
 #' Write a pinnable dataset to a pins board
+#'
+#' @param   x   An object to be published. Typically a `pinnable` object for writing a pin to a
+#'   pins board.
 #'
 #' @export
 publish <- function(x) {

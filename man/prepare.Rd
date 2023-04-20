@@ -6,6 +6,10 @@
 \usage{
 prepare(x)
 }
+\arguments{
+\item{x}{An object to be published. Typically a \code{pinnable} object for writing a pin to a
+pins board.}
+}
 \description{
 Prepare a dataset for publication to pins
 }
