@@ -18,6 +18,7 @@ Imports:
     rlang,
     tidyr
 Suggests: 
+    mockery,
     testthat,
     withr
 Depends: 
