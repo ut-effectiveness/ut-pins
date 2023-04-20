@@ -4,17 +4,10 @@
 \alias{pinnable}
 \title{S3 class for generating/storing pin preparation/publishing details}
 \usage{
-pinnable(
-  prepare_fn = NULL,
-  pin_board = NULL,
-  pin_name = NULL,
-  pin_type = "rds"
-)
+pinnable(prepare_fn = NULL, pin_name = NULL, pin_type = "rds")
 }
 \arguments{
 \item{prepare_fn}{Function for preparing the data that will be stored in the associated pin.}
-
-\item{pin_board}{Board where the pin will be written.}
 
 \item{pin_name}{Name of the pin.}
 

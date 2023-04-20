@@ -43,12 +43,11 @@ describe("publish(pinnable)", {
 
     numbers_pinnable <- pinnable(
       pin_name = pin_name,
-      pin_board = pin_board,
       prepare_fn = function() rnorm(10)
     )
 
     prepared_pin <- prepare(numbers_pinnable)
-    published_pin <- publish(prepared_pin)
+    published_pin <- publish(prepared_pin, pin_board)
 
     it("returns the pinnable object", {
       expect_is(published_pin, "pinnable")
@@ -58,7 +57,7 @@ describe("publish(pinnable)", {
     })
     it("creates a pin that can be read back", {
       stored_numbers <- pins::pin_read(
-        published_pin$pin_board,
+        pin_board,
         published_pin$pin_path
       )
       expect_equal(stored_numbers, prepared_pin$data)
@@ -70,8 +69,7 @@ describe("publish(pinnable)", {
     pin_board <- pins::board_temp()
 
     letters_pinnable <- pinnable(
-      pin_name = pin_name,
-      pin_board = pin_board
+      pin_name = pin_name
     )
 
     if ("data" %in% names(letters_pinnable)) {
@@ -79,7 +77,7 @@ describe("publish(pinnable)", {
     }
 
     expect_error(
-      publish(letters_pinnable)
+      publish(letters_pinnable, pin_board)
     )
   })
 })
@@ -92,7 +90,6 @@ describe("publish(verbose_pinnable)", {
 
     beatles_pinnable <- verbose_pinnable(
       pin_name = pin_name,
-      pin_board = pin_board,
       prepare_fn = function() c("John", "Paul", "George", "Ringo")
     ) %>%
       prepare()
@@ -100,7 +97,7 @@ describe("publish(verbose_pinnable)", {
     # WHEN: publish() is called and the pin is written
     mock_httr <- mockery::mock(TRUE)
     mockery::stub(publish.verbose_pinnable, "httr::with_verbose", mock_httr)
-    publish(beatles_pinnable)
+    publish(beatles_pinnable, pin_board)
 
     # THEN: verbose HTTP output is created using httr::with_verbose
     mockery::expect_called(mock_httr, 1)
@@ -108,20 +105,8 @@ describe("publish(verbose_pinnable)", {
 })
 
 describe("assert_publishable", {
-  it("breaks if pin board is not defined", {
-    no_board <- pinnable(
-      pin_name = "letters",
-      pin_type = "rds",
-      prepare_fn = function() letters
-    )
-    no_board <- prepare(no_board)
-
-    expect_error(assert_publishable(no_board))
-  })
-
   it("breaks if pin name is not defined", {
     no_name <- pinnable(
-      pin_board = pins::board_temp(),
       pin_type = "rds",
       prepare_fn = function() letters
     )

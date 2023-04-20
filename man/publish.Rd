@@ -4,11 +4,14 @@
 \alias{publish}
 \title{Write a pinnable dataset to a pins board}
 \usage{
-publish(x)
+publish(x, ...)
 }
 \arguments{
 \item{x}{An object to be published. Typically a \code{pinnable} object for writing a pin to a
 pins board.}
+
+\item{...}{Other arguments defining where the object should be published. Use
+\code{pin_board = the_board} to define the {pins} board where pins should be written.}
 }
 \description{
 Write a pinnable dataset to a pins board
