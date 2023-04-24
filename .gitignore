@@ -1,3 +1,6 @@
+# Markdown-knitted report files
+*.html
+
 # History files
 .Rhistory
 .Rapp.history
