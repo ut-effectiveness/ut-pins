@@ -1,9 +1,17 @@
+#' Summarize the faculty workload data-frames over time
+#'
+#' @param   instructional_faculty_workload_df,non_instructional_faculty_workload_df   Data-frames.
+#'   Datasets containing the faculty workloads for instructional and non-instructional work.
+#' @param   time_aggregator   The time-span over which the workloads should be summarized. Allowed
+#'   values: `term`, `academic_year`
+#'
+#' @importFrom   rlang   .data
+#' @export
+
 get_summarized_faculty_workload_df <- function(instructional_faculty_workload_df,
                                                non_instructional_faculty_workload_df,
-                                               time_aggregator) {
-  # options for time_aggregator are:
-  # 1. "term"
-  # 2. "academic_year"
+                                               time_aggregator = c("term", "academic_year")) {
+  time_aggregator <- match.arg(time_aggregator)
   grouping <- c("faculty_info", "sis_id", "full_name", time_aggregator)
 
   # For storing the summarized faculty-workloads
