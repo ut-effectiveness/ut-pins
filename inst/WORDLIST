@@ -1,6 +1,7 @@
 apr
 aut
 cre
+dplyr
 gpl
 LazyData
 mit
@@ -9,9 +10,11 @@ pkgload
 pre
 Pre
 README
+rlang
 Roxygen
 RoxygenNote
 rstudio
 testthat
+tidyr
 utPins
 withr
