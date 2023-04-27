@@ -37,10 +37,10 @@ get_summarized_faculty_workload_df <- function(instructional_faculty_workload_df
             .data[["course_cross_list_group"]][!is.na(.data[["course_cross_list_group"]])]
           )
       ),
-      faculty_status = dplyr::first(na.omit(.data[["faculty_status"]])),
-      faculty_rank = dplyr::first(na.omit(.data[["faculty_rank"]])),
-      faculty_college = dplyr::first(na.omit(.data[["faculty_college"]])),
-      faculty_department = dplyr::first(na.omit(.data[["faculty_department"]])),
+      faculty_status = dplyr::first(stats::na.omit(.data[["faculty_status"]])),
+      faculty_rank = dplyr::first(stats::na.omit(.data[["faculty_rank"]])),
+      faculty_college = dplyr::first(stats::na.omit(.data[["faculty_college"]])),
+      faculty_department = dplyr::first(stats::na.omit(.data[["faculty_department"]])),
       contracted_workload = min(.data[["contracted_workload"]])
     ) %>%
     dplyr::ungroup()
@@ -51,10 +51,10 @@ get_summarized_faculty_workload_df <- function(instructional_faculty_workload_df
     dplyr::group_by_at(grouping) %>%
     dplyr::summarize(
       non_instructional_workload = sum(.data[["non_instructional_workload"]]),
-      faculty_status = dplyr::first(na.omit(.data[["faculty_status"]])),
-      faculty_rank = dplyr::first(na.omit(.data[["faculty_rank"]])),
-      faculty_college = dplyr::first(na.omit(.data[["faculty_college"]])),
-      faculty_department = dplyr::first(na.omit(.data[["faculty_department"]])),
+      faculty_status = dplyr::first(stats::na.omit(.data[["faculty_status"]])),
+      faculty_rank = dplyr::first(stats::na.omit(.data[["faculty_rank"]])),
+      faculty_college = dplyr::first(stats::na.omit(.data[["faculty_college"]])),
+      faculty_department = dplyr::first(stats::na.omit(.data[["faculty_department"]])),
       contracted_workload = min(.data[["contracted_workload"]])
     ) %>%
     dplyr::ungroup()
