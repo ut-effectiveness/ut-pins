@@ -6,8 +6,11 @@ get_summarized_faculty_workload_df <- function(instructional_faculty_workload_df
   # 2. "academic_year"
   grouping <- c("faculty_info", "sis_id", "full_name", time_aggregator)
 
+  # For storing the summarized faculty-workloads
+  summarized_data <- list()
+
   # Summarize instructional workload.
-  summarized_instructional_faculty_workload_df <- instructional_faculty_workload_df %>%
+  summarized_data$instructional <- instructional_faculty_workload_df %>%
     dplyr::mutate(contracted_workload = tidyr::replace_na(.data[["contracted_workload"]], 0)) %>%
     dplyr::group_by_at(grouping) %>%
     dplyr::summarize(
@@ -35,7 +38,7 @@ get_summarized_faculty_workload_df <- function(instructional_faculty_workload_df
     dplyr::ungroup()
 
   # Summarize non-instructional workload.
-  summarized_non_instructional_faculty_workload_df <- non_instructional_faculty_workload_df %>%
+  summarized_data$non_instructional <- non_instructional_faculty_workload_df %>%
     dplyr::mutate(contracted_workload = tidyr::replace_na(.data[["contracted_workload"]], 0)) %>%
     dplyr::group_by_at(grouping) %>%
     dplyr::summarize(
@@ -50,8 +53,8 @@ get_summarized_faculty_workload_df <- function(instructional_faculty_workload_df
 
   # full join instructional and non-instructional workload data frames
   workload_exploration_df <- dplyr::full_join(
-    x = summarized_instructional_faculty_workload_df,
-    y = summarized_non_instructional_faculty_workload_df,
+    x = summarized_data$instructional,
+    y = summarized_data$non_instructional,
     by = grouping
   ) %>%
     dplyr::mutate(
