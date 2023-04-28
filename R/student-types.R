@@ -1,3 +1,12 @@
+#' Determine the different student types (High school, Continuing Graduate ...)
+#'
+#' @param   student_type_determination_variables   Data-frame. Contains all variables required to
+#' determine the type of each student.
+#' @param   parameter_term,term_two_terms_ago   Term
+#'
+#' @importFrom   rlang   .data
+#' @export
+
 calculate_student_types <- function(student_type_determination_variables,
                                     parameter_term,
                                     term_two_terms_ago) {
