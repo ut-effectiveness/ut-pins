@@ -12,6 +12,7 @@ pinnable
 pkgload
 pre
 Pre
+purrr
 README
 rlang
 Roxygen

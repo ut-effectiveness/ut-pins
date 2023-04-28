@@ -15,6 +15,7 @@ Imports:
     httr,
     magrittr,
     pins,
+    purrr,
     rlang,
     tidyr
 Suggests: 
