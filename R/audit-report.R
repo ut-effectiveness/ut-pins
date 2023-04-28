@@ -22,6 +22,12 @@ get_audit_report <- function(audit_type = c(
   utHelpR::get_data_from_sql_file(sql_file, dsn = dsn)
 }
 
+#' Add "audit_reports_" to the start of a string
+#'
+#' @param   x   String
+#'
+#' @export
+
 as_audit_report_name <- function(x) {
   paste0("audit_reports_", x)
 }
