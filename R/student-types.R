@@ -2,7 +2,7 @@ calculate_student_types <- function(student_type_determination_variables,
                                     parameter_term,
                                     term_two_terms_ago) {
   return_df <- student_type_determination_variables %>%
-    mutate(calculated_student_type = case_when(
+    dplyr::mutate(calculated_student_type = dplyr::case_when(
       # GROUP: High School ####
       # if the calculated high school graduation term is greater than the passed in parameter term,
       # then the student is a high school student on the provided parameter term
@@ -88,9 +88,9 @@ calculate_student_types <- function(student_type_determination_variables,
       ~ "Unknown"
     ), ) %>%
     # set term for what is used in calculations
-    mutate(term_id = parameter_term) %>%
+    dplyr::mutate(term_id = parameter_term) %>%
     # only return relevant variables from calculation
-    select(sis_system_id, term_id, calculated_student_type)
+    dplyr::select(sis_system_id, term_id, calculated_student_type)
 
   return(return_df)
 }
