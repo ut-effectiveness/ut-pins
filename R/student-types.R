@@ -18,14 +18,16 @@ calculate_student_types <- function(student_type_determination_variables,
       ## Continuing Graduate ####
       # if last_term_enrolled_as_graduate >= (parameter_term - two_terms)
       #    return "Continuing Graduate"
-      .data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] >= term_two_terms_ago &
+      (.data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] >=
+        term_two_terms_ago) &
         .data[["student_level"]] == "GR"
       ~ "Continuing Graduate",
 
       ## Readmit Graduate ####
       # if last_term_enrolled_as_graduate < (parameter_term - two_terms)
       #    return "Readmit Graduate"
-      .data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] < term_two_terms_ago &
+      (.data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] <
+        term_two_terms_ago) &
         .data[["student_level"]] == "GR"
       ~ "Readmit Graduate",
 
@@ -33,7 +35,8 @@ calculate_student_types <- function(student_type_determination_variables,
       # if has_transfer_graduate_credits & ( first_term_enrolled_as_graduate == parameter_term )
       #    return "Transfer Graduate"
       .data[["has_transfer_credits_on_or_after_calculated_hs_graduation_term"]] &
-        .data[["first_term_enrolled_on_or_after_calculated_hs_graduation_term"]] == parameter_term &
+        (.data[["first_term_enrolled_on_or_after_calculated_hs_graduation_term"]] ==
+          parameter_term) &
         .data[["student_level"]] == "GR" &
         .data[["transfer_credits_level"]] == "GR"
       ~ "Transfer Graduate",
@@ -52,14 +55,16 @@ calculate_student_types <- function(student_type_determination_variables,
       ## Continuing ####
       # if last_term_enrolled_as_undergraduate_after_hs_grad >= (parameter_term - two_terms):
       #  return "Continuing Undergraduate"
-      .data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] >= term_two_terms_ago &
+      (.data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] >=
+        term_two_terms_ago) &
         .data[["student_level"]] == "UG"
       ~ "Continuing Undergraduate",
 
       ## Readmit ####
       # if last_term_enrolled_as_undergraduate_after_hs_grad < (parameter_term - two_terms):
       #  return "Readmit Undergraduate"
-      .data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] < term_two_terms_ago &
+      (.data[["last_term_enrolled_on_or_after_calculated_hs_graduation_term"]] <
+        term_two_terms_ago) &
         .data[["student_level"]] == "UG"
       ~ "Readmit Undergraduate",
 
@@ -69,7 +74,8 @@ calculate_student_types <- function(student_type_determination_variables,
       #   AND (first_term_enrolled_as_undergraduate_after_hs_grad == parameter_term):
       #  return "Transfer Undergraduate"
       .data[["has_transfer_credits_on_or_after_calculated_hs_graduation_term"]] &
-        .data[["first_term_enrolled_on_or_after_calculated_hs_graduation_term"]] == parameter_term &
+        (.data[["first_term_enrolled_on_or_after_calculated_hs_graduation_term"]] ==
+          parameter_term) &
         .data[["student_level"]] == "UG" &
         .data[["transfer_credits_level"]] == "UG"
       ~ "Transfer Undergraduate",
