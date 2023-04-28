@@ -4,6 +4,7 @@ cre
 dplyr
 gpl
 LazyData
+magrittr
 mit
 ORCID
 pkgload
