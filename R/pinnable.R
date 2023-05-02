@@ -118,6 +118,24 @@ publish.verbose_pinnable <- function(x, pin_board, ...) {
   )
 }
 
+#' Get the data-preparation timings for a `pinnable` that has successfully prepared it's data
+#'
+#' @param   x   A publishable `pinnable` (it's data has been prepared).
+#' @return   Data-frame with columns `pin_name`, `start`, `end` and `duration`.
+#'
+#' @export
+
+extract_times <- function(x) {
+  assert_publishable(x)
+
+  tibble::tibble(
+    pin_name = x$pin_name,
+    start = x$prep_start,
+    end = x$prep_end,
+    duration = x$prep_end - x$prep_start
+  )
+}
+
 assert_publishable <- function(x) {
   stopifnot(inherits(x, "pinnable"))
   stopifnot("data" %in% names(x))

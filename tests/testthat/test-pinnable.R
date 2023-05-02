@@ -6,10 +6,15 @@ describe("pinnable()", {
   })
 })
 
-describe("prepare(pinnable)", {
-  iris_pinnable <- pinnable(
+get_iris_pinnable <- function() {
+  pinnable(
+    pin_name = "iris",
     prepare_fn = function() datasets::iris
   )
+}
+
+describe("prepare(pinnable)", {
+  iris_pinnable <- get_iris_pinnable()
 
   it("creates a new `pinnable` with a `data` entry", {
     prepared_pin <- prepare(iris_pinnable)
@@ -101,6 +106,30 @@ describe("publish(verbose_pinnable)", {
 
     # THEN: verbose HTTP output is created using httr::with_verbose
     mockery::expect_called(mock_httr, 1)
+  })
+})
+
+describe("extract_times", {
+  iris_pinnable <- get_iris_pinnable()
+
+  it("returns a data-frame containing timings", {
+    now <- as.POSIXct("2023-05-02 13:38:55 BST")
+    then <- as.POSIXct("2023-05-02 13:37:55 BST")
+    mock_time <- mockery::mock(then, now)
+
+    with_mock(Sys.time = mock_time, {
+      iris_prepared <- prepare(iris_pinnable)
+      expect_equal(
+        extract_times(iris_prepared),
+        tibble::tibble(
+          pin_name = "iris", start = then, end = now, duration = now - then
+        )
+      )
+    })
+  })
+
+  it("fails with an unprepared pinnable", {
+    expect_error(extract_times(iris_pinnable))
   })
 })
 
