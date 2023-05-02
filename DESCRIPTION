@@ -17,6 +17,7 @@ Imports:
     pins,
     purrr,
     rlang,
+    tibble,
     tidyr
 Suggests: 
     mockery,

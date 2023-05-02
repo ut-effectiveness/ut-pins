@@ -19,6 +19,7 @@ Roxygen
 RoxygenNote
 rstudio
 testthat
+tibble
 tidyr
 utPins
 withr
