@@ -31,9 +31,8 @@ get_faculty_term_df <- function() {
     system.file("sql", "faculty_workload", "faculty_term.sql", package = "utPins"),
     dsn = "***REMOVED***"
   )
-  data("contracted_workload", package = "utPins", envir = environment())
 
-  format_faculty_term_df(faculty_term, contracted_workload)
+  format_faculty_term_df(faculty_term, utPins::contracted_workload)
 }
 
 #' Format and combine the faculty term and contracted workflow datasets together
