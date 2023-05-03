@@ -12,7 +12,7 @@ get_data_steward_audit <- function(audit_type = c(
                                      "room",
                                      "graduation",
                                      "course",
-                                     "building",
+                                     "building"
                                    ),
                                    dsn = "***REMOVED***") {
   audit_type <- match.arg(audit_type)

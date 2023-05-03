@@ -5,8 +5,7 @@
 \title{Get a data-frame containing a data-steward-audit dataset}
 \usage{
 get_data_steward_audit(
-  audit_type = c("student", "student_course", "room", "graduation", "course", "building",
-    ),
+  audit_type = c("student", "student_course", "room", "graduation", "course", "building"),
   dsn = "***REMOVED***"
 )
 }
