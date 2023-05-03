@@ -12,11 +12,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     dplyr,
+    httr,
     magrittr,
     pins,
+    purrr,
     rlang,
+    tibble,
     tidyr
 Suggests: 
+    mockery,
     testthat,
     withr
 Depends: 
