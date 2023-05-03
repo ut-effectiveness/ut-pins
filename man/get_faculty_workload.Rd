@@ -4,10 +4,15 @@
 \alias{get_faculty_workload}
 \title{Get a data-frame containing instructional or non-instructional workloads for faculty members}
 \usage{
-get_faculty_workload(workload_type = c("instructional", "non_instructional"))
+get_faculty_workload(
+  workload_type = c("instructional", "non_instructional"),
+  dsn = "***REMOVED***"
+)
 }
 \arguments{
 \item{workload_type}{Scalar character. Either "instructional" or "non_instructional".}
+
+\item{dsn}{A DSN entry: \code{***REMOVED***}, \code{***REMOVED***}, \code{***REMOVED***}, \code{***REMOVED***}, etc...}
 }
 \description{
 Get a data-frame containing instructional or non-instructional workloads for faculty members

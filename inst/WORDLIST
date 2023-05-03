@@ -2,6 +2,7 @@ apr
 aut
 cre
 dplyr
+DSN
 gpl
 httr
 LazyData
