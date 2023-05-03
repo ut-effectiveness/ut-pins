@@ -37,7 +37,6 @@ repos:
           data-raw/datasets/.*|
           data/.*|
           )$
-    -   id: lintr
     -   id: readme-rmd-rendered
     -   id: parsable-R
     -   id: no-browser-statement
@@ -56,6 +55,15 @@ repos:
     -   id: check-pre-commit-ci-config
 -   repo: local
     hooks:
+    -   id: local-lintr
+        name: Run lintr with global R environment
+        entry: >
+          Rscript -e "pkgload::load_all();
+          output <- commandArgs(trailingOnly=TRUE) |> strsplit(' ') |>
+          unlist() |> lapply(lintr::lint) |> purrr::compact();
+          if (length(output) > 0) {print(output); stop('Files not lint free')}"
+        language: system
+        files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
     -   id: forbid-to-commit
         name: Don't commit common R artifacts
         entry: Cannot commit .Rhistory, .RData, .Rds or .rds.
