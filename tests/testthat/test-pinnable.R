@@ -8,7 +8,7 @@ describe("pinnable()", {
 
 get_iris_pinnable <- function() {
   pinnable(
-    pin_name = "iris",
+    name = "iris",
     prepare_fn = function() datasets::iris
   )
 }
@@ -47,7 +47,7 @@ describe("publish(pinnable)", {
     pin_board <- pins::board_temp()
 
     numbers_pinnable <- pinnable(
-      pin_name = pin_name,
+      name = pin_name,
       prepare_fn = function() rnorm(10)
     )
 
@@ -74,7 +74,7 @@ describe("publish(pinnable)", {
     pin_board <- pins::board_temp()
 
     letters_pinnable <- pinnable(
-      pin_name = pin_name
+      name = pin_name
     )
 
     if ("data" %in% names(letters_pinnable)) {
@@ -94,7 +94,7 @@ describe("publish(verbose_pinnable)", {
     pin_board <- pins::board_temp()
 
     beatles_pinnable <- verbose_pinnable(
-      pin_name = pin_name,
+      name = pin_name,
       prepare_fn = function() c("John", "Paul", "George", "Ringo")
     ) %>%
       prepare()
@@ -136,7 +136,7 @@ describe("extract_times", {
 describe("assert_publishable", {
   it("breaks if pin name is not defined", {
     no_name <- pinnable(
-      pin_type = "rds",
+      type = "rds",
       prepare_fn = function() letters
     )
     no_name <- prepare(no_name)
