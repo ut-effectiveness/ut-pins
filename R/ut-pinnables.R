@@ -1,3 +1,33 @@
+#' Get a list of `pinnable` objects related to audit reports
+#'
+#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#'
+#' @return   List of `pinnable`s.
+
+get_audit_report_pinnables <- function(dsn = "***REMOVED***") {
+  pins <- list()
+
+  audit_types <- c("students", "courses", "spbpers", "sorhsch", "goradid", "student_courses")
+  audit_reports <- as_audit_report_name(audit_types) # audit_reports_{x}
+
+  audit_pin_fn <- function(x) {
+    pinnable(
+      name = paste0(as_audit_report_name(x), "_pin"),
+      prepare_fn = function() {
+        get_audit_report(audit_type = x, dsn = dsn)
+      },
+      cadence = "daily",
+      subgroup = "audit report"
+    )
+  }
+
+  pins[audit_reports] <- audit_types %>%
+    purrr::set_names(audit_reports) %>%
+    purrr::map(audit_pin_fn)
+
+  pins
+}
+
 #' Get a list of `pinnable` objects related to faculty-workload
 #'
 #' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
