@@ -24,3 +24,31 @@ pins_workflow_report <- function(pinnables,
     }) %>%
     purrr::list_rbind()
 }
+
+#' Summarize why each pinnable didn't succeed at data-preparation or publication
+#'
+#' @param   failures   List of errors arising from the `error` entry returned by `publish_all` or
+#'   `prepare_all`.
+#' @param   pinnables   List of `pinnable` objects. There must be an entry for each entry in
+#'   `failures`.
+#'
+#' @return   Data-frame with columns `pin_name`, `subgroup` (taken from `pinnables`), `message`
+#'   and `call`. The `call` entry can be extensive, but contains details of the call stack prior
+#'   to failure.
+#'
+#' @export
+
+failure_report <- function(failures, pinnables) {
+  failures %>%
+    purrr::imap(
+      function(x, idx) {
+        tibble::tibble(
+          pin_name = pinnables[[idx]]$pin_name,
+          subgroup = pinnables[[idx]]$pin_subgroup,
+          message = x$message,
+          call = as.character(x$call)
+        )
+      }
+    ) %>%
+    purrr::list_rbind()
+}
