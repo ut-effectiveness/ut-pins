@@ -18,7 +18,8 @@ Imports:
     purrr,
     rlang,
     tibble,
-    tidyr
+    tidyr,
+    utHelpR
 Suggests: 
     mockery,
     testthat,

@@ -6,6 +6,8 @@
 #' @param   setting   Scalar character. Either "prod" (default; for connecting to the production
 #'   pins board) or "test" (for creating a local pin board, useful for debugging).
 #' @return   A `pins_board` object.
+#'
+#' @export
 
 get_pins_board <- function(setting = c("prod", "test")) {
   setting <- match.arg(setting)
