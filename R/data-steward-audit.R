@@ -18,7 +18,7 @@ get_data_steward_audit <- function(audit_type = c(
   audit_type <- match.arg(audit_type)
 
   sql_file <- system.file(
-    "sql", "data_steward_audit", paste0(audit_type, ".sql", package = "utPins", mustWork = TRUE)
+    "sql", "data_steward_audit", paste0(audit_type, ".sql"), package = "utPins", mustWork = TRUE
   )
   utHelpR::get_data_from_sql_file(sql_file, dsn = dsn)
 }
