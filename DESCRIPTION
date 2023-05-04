@@ -18,7 +18,7 @@ Imports:
     rlang,
     tibble,
     tidyr,
-    utHelpR
+    utHelpR (>= 0.0.0.9000)
 Suggests: 
     mockery,
     testthat,
@@ -26,3 +26,5 @@ Suggests:
 Depends: 
     R (>= 2.10)
 LazyData: true
+Remotes:  
+    dsu-effectiveness/utHelpR
