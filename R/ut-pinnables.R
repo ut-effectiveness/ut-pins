@@ -1,3 +1,22 @@
+#' Get a list of `pinnable` objects related to the APR supplemental analysis
+#'
+#' @return   List of `pinnable`s
+
+get_apr_pinnables <- function() {
+  pins <- list()
+
+  pins$apr_supplemental_pin <- pinnable(
+    name = "apr_supplemental_pin",
+    cadence = "daily",
+    subgroup = "apr",
+    prepare_fn = function() {
+      utPins::apr_supplemental_data
+    }
+  )
+
+  return(pins)
+}
+
 #' Get a pinnable object for testing that pin-writes work
 #'
 #' @param   cadence   Scalar character. Either 'daily', 'weekly' or 'monthly'.
