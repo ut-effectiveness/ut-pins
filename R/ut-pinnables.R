@@ -1,3 +1,24 @@
+#' Get a list of `pinnable` objects whose data related to student enrollment
+#'
+#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#'
+#' @return   List of `pinnable`s.
+#'
+#' @export
+
+get_enrollment_pinnables <- function(dsn = "***REMOVED***") {
+  pins <- list()
+
+  pins$daily_enrollment <- pinnable(
+    name = "daily_enrollment_pin",
+    prepare_fn = function() get_daily_enrollment(dsn = dsn),
+    cadence = "daily",
+    subgroup = "enrollment"
+  )
+
+  pins
+}
+
 #' Get a list of `pinnable` objects whose data is used in the `DataStewardAudit` app
 #'
 #' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
