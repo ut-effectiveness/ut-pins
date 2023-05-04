@@ -64,14 +64,16 @@ get_student_type_pinnables <- function(parameter_term,
                                        term_two_terms_ago,
                                        dsn = "***REMOVED***") {
   pins <- list()
+  cadence <- "weekly"
+  subgroup <- "student type"
 
   pins$student_type_determination_variables <- pinnable(
     name = "student_type_audit_student_type_determination_variables_pin",
     prepare_fn = function() {
       get_student_type_variables(dsn = dsn)
     },
-    cadence = "weekly",
-    subgroup = "student type"
+    cadence = cadence,
+    subgroup = subgroup
   )
 
   pins$student_type_audit_audit_calculated_student_types <- pinnable(
@@ -85,8 +87,8 @@ get_student_type_pinnables <- function(parameter_term,
       )
       student_types
     },
-    cadence = "weekly",
-    subgroup = "student type"
+    cadence = cadence,
+    subgroup = subgroup
   )
 
   pins
@@ -97,6 +99,8 @@ get_student_type_pinnables <- function(parameter_term,
 #' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
 #'
 #' @return   List of `pinnable`s.
+#'
+#' @export
 
 get_audit_report_pinnables <- function(dsn = "***REMOVED***") {
   pins <- list()
@@ -127,6 +131,8 @@ get_audit_report_pinnables <- function(dsn = "***REMOVED***") {
 #' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
 #'
 #' @return   List of `pinnable`s.
+#'
+#' @export
 
 get_faculty_workload_pinnables <- function(dsn = "***REMOVED***") {
   pins <- list()
@@ -188,6 +194,8 @@ get_faculty_workload_pinnables <- function(dsn = "***REMOVED***") {
 #' Get a list of `pinnable` objects related to the APR supplemental analysis
 #'
 #' @return   List of `pinnable`s
+#'
+#' @export
 
 get_apr_pinnables <- function() {
   pins <- list()
@@ -210,6 +218,8 @@ get_apr_pinnables <- function() {
 #' @param   verbose   Scalar logical (default `TRUE`). Should a verbose pinnable be made?
 #'
 #' @return   A single `pinnable` object with pin name `<cadence>_test_pin`
+#'
+#' @export
 
 get_test_pinnable <- function(cadence = c("daily", "weekly", "monthly"),
                               verbose = TRUE) {
@@ -221,6 +231,8 @@ get_test_pinnable <- function(cadence = c("daily", "weekly", "monthly"),
     name = pin_name,
     prepare_fn = function() {
       datasets::iris
-    }
+    },
+    cadence = cadence,
+    subgroup = "test"
   )
 }
