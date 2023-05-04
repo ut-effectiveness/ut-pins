@@ -2,17 +2,28 @@
 #'
 #' @param   prepare_fn   Function for preparing the data that will be stored in the associated pin.
 #' @param   pin_name   Name of the pin.
+#' @param   pin_subgroup   Optional scalar character. This gives you a way to annotate
+#'   sub-groupings of pins. Some may relate to staffing, or to students. Handle that annotation
+#'   here.
+#' @param   pin_cadence   Scalar character. The frequency with which a pin should be updated.
+#'   Either "daily", "weekly" or "monthly".
 #' @param   pin_type   Storage type for the pin (must be a format usable by `pin_write`).
 #'
 #' @export
 
 pinnable <- function(prepare_fn = NULL,
                      pin_name = NULL,
+                     pin_subgroup = NULL,
+                     pin_cadence = c("daily", "weekly", "monthly"),
                      pin_type = "rds") {
+  pin_cadence <- match.arg(pin_cadence)
+
   structure(
     list(
       prepare_fn = prepare_fn,
       pin_name = pin_name,
+      pin_subgroup = pin_subgroup,
+      pin_cadence = pin_cadence,
       pin_type = pin_type
     ),
     class = "pinnable"
@@ -28,10 +39,14 @@ pinnable <- function(prepare_fn = NULL,
 
 verbose_pinnable <- function(prepare_fn = NULL,
                              pin_name = NULL,
+                             pin_subgroup = NULL,
+                             pin_cadence = c("daily", "weekly", "monthly"),
                              pin_type = "rds") {
   p <- pinnable(
     prepare_fn = prepare_fn,
     pin_name = pin_name,
+    pin_subgroup = pin_subgroup,
+    pin_cadence = pin_cadence,
     pin_type = pin_type
   )
   class(p) <- c("verbose_pinnable", class(p))
