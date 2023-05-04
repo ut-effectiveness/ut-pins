@@ -1,3 +1,44 @@
+#' Get a list of `pinnable` objects related to student types
+#'
+#' @param   parameter_term,term_two_terms_ago   Term string (e.g., "202320").
+#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#'
+#' @return   List of `pinnable`s.
+#'
+#' @export
+
+get_student_type_pinnables <- function(parameter_term,
+                                       term_two_terms_ago,
+                                       dsn = "***REMOVED***") {
+  pins <- list()
+
+  pins$student_type_determination_variables <- pinnable(
+    name = "student_type_audit_student_type_determination_variables_pin",
+    prepare_fn = function() {
+      get_student_type_variables(dsn = dsn)
+    },
+    cadence = "weekly",
+    subgroup = "student type"
+  )
+
+  pins$student_type_audit_audit_calculated_student_types <- pinnable(
+    name = "student_type_audit_calculated_student_types_pin",
+    prepare_fn = function() {
+      type_determination_variables <- get_student_type_variables(dsn = dsn)
+      student_types <- calculate_student_types(
+        type_determination_variables,
+        parameter_term = parameter_term,
+        term_two_terms_ago = term_two_terms_ago
+      )
+      student_types
+    },
+    cadence = "weekly",
+    subgroup = "student type"
+  )
+
+  pins
+}
+
 #' Get a list of `pinnable` objects related to audit reports
 #'
 #' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
