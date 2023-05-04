@@ -25,6 +25,21 @@ pins_workflow_report <- function(pinnables,
     purrr::list_rbind()
 }
 
+#' Summarize the start-time, end-time and duration for all successful data-preparation steps
+#'
+#' @param   prepared_pinnables   List of `pinnable` objects. Each must have successfully passed
+#'   through the `prepare()` function (so that it's data-prep timings are available).
+#'
+#' @return   Data-frame with columns `pin_name`, `start`, `end`, `duration`.
+#'
+#' @export
+
+timing_report <- function(prepared_pinnables) {
+  prepared_pinnables %>%
+    purrr::map(extract_times) %>%
+    purrr::list_rbind()
+}
+
 #' Summarize why each pinnable didn't succeed at data-preparation or publication
 #'
 #' @param   failures   List of errors arising from the `error` entry returned by `publish_all` or
