@@ -6,25 +6,25 @@
 \usage{
 verbose_pinnable(
   prepare_fn = NULL,
-  pin_name = NULL,
-  pin_subgroup = NULL,
-  pin_cadence = c("daily", "weekly", "monthly"),
-  pin_type = "rds"
+  name = NULL,
+  subgroup = NULL,
+  cadence = c("daily", "weekly", "monthly"),
+  type = "rds"
 )
 }
 \arguments{
 \item{prepare_fn}{Function for preparing the data that will be stored in the associated pin.}
 
-\item{pin_name}{Name of the pin.}
+\item{name}{Name of the pin.}
 
-\item{pin_subgroup}{Optional scalar character. This gives you a way to annotate
+\item{subgroup}{Optional scalar character. This gives you a way to annotate
 sub-groupings of pins. Some may relate to staffing, or to students. Handle that annotation
 here.}
 
-\item{pin_cadence}{Scalar character. The frequency with which a pin should be updated.
+\item{cadence}{Scalar character. The frequency with which a pin should be updated.
 Either "daily", "weekly" or "monthly".}
 
-\item{pin_type}{Storage type for the pin (must be a format usable by \code{pin_write}).}
+\item{type}{Storage type for the pin (must be a format usable by \code{pin_write}).}
 }
 \description{
 When publishing using \code{pin_write}, this class will output verbose HTTP details.
