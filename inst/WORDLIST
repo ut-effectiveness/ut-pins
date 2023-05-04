@@ -7,7 +7,9 @@ gpl
 httr
 LazyData
 magrittr
+MERCHANTABILITY
 mit
+NONINFRINGEMENT
 ORCID
 pinnable
 pkgload
@@ -19,6 +21,7 @@ rlang
 Roxygen
 RoxygenNote
 rstudio
+sublicense
 testthat
 tibble
 tidyr
