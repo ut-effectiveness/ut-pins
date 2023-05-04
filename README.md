@@ -1,4 +1,9 @@
 # utPins
+
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/dsu-effectiveness/utPins/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dsu-effectiveness/utPins/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 ## Description:
 This repository contains the R code that produces pins on the r studio connect server for Utah Tech University.
 
