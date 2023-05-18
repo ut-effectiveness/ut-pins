@@ -1,6 +1,6 @@
 #' Get a list of `pinnable` objects whose data related to student enrollment
 #'
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
 #'
 #' @return   List of `pinnable`s.
 #'
@@ -21,7 +21,7 @@ get_enrollment_pinnables <- function(dsn = "***REMOVED***") {
 
 #' Get a list of `pinnable` objects whose data is used in the `DataStewardAudit` app
 #'
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
 #'
 #' @return   List of `pinnable`s.
 #'
@@ -54,7 +54,7 @@ get_data_steward_pinnables <- function(dsn = "***REMOVED***") {
 #' Get a list of `pinnable` objects related to student types
 #'
 #' @param   parameter_term,term_two_terms_ago   Term string (e.g., "202320").
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
 #'
 #' @return   List of `pinnable`s.
 #'
@@ -96,7 +96,7 @@ get_student_type_pinnables <- function(parameter_term,
 
 #' Get a list of `pinnable` objects related to audit reports
 #'
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
 #'
 #' @return   List of `pinnable`s.
 #'
@@ -128,7 +128,7 @@ get_audit_report_pinnables <- function(dsn = "***REMOVED***") {
 
 #' Get a list of `pinnable` objects related to faculty-workload
 #'
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
 #'
 #' @return   List of `pinnable`s.
 #'
