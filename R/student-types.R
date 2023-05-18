@@ -1,14 +1,14 @@
 #' Get the variables used to determine student type
 #'
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
+#' @return   A cleaned-up data.frame containing the student-type-determination-variables dataset.
+#'
 #' @export
 
 get_student_type_variables <- function(dsn = "***REMOVED***") {
-  sql_file <- system.file(
-    "sql", "student_type_audit", "student_type_determination_variables.sql",
-    package = "utPins"
-  )
-  utHelpR::get_data_from_sql_file(sql_file, dsn = dsn)
+  sql_query <- get_query_string("student_type_determination_variables")
+
+  get_data_from_sql_query(sql_query, dsn = dsn)
 }
 
 #' Determine the different student types (High school, Continuing Graduate ...)

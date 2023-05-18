@@ -7,8 +7,9 @@
 get_query_string(query_type)
 }
 \arguments{
-\item{query_type}{Scalar character. Valid values are \code{daily_enrollment}. Defines the type of
-query that is to be made. Invalid values will evoke an error.}
+\item{query_type}{Scalar character. Valid values are \code{daily_enrollment},
+\code{student_type_determination_variables}. Defines the type of query that is to be made. Invalid
+values will evoke an error.}
 }
 \value{
 SQL query string for use in \code{DBI::dbGetQuery}.
