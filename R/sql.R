@@ -26,11 +26,10 @@ get_data_from_sql_query <- function(query_string, dsn) {
 #' @export
 
 get_query_string <- function(query_type) {
+  utpins_path <- function(...) system.file(..., package = "utPins", mustWork = TRUE)
+
   sql_files <- list(
-    daily_enrollment = system.file(
-      "sql", "admissions", "daily_enrollment.sql",
-      package = "utPins", mustWork = TRUE
-    )
+    daily_enrollment = utpins_path("sql", "admissions", "daily_enrollment.sql")
   )
 
   stopifnot(query_type %in% names(sql_files))
