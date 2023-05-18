@@ -7,7 +7,8 @@
 get_query_string(query_type)
 }
 \arguments{
-\item{query_type}{Scalar character. Valid values are \code{daily_enrollment},
+\item{query_type}{Scalar character. Valid values are \code{daily_enrollment}, \code{faculty_term},
+\code{faculty_term_instructional_workload}, \code{faculty_term_non_instructional_workload},
 \code{student_type_determination_variables}. Defines the type of query that is to be made. Invalid
 values will evoke an error.}
 }

@@ -1,7 +1,8 @@
 #' Get a data-frame containing instructional or non-instructional workloads for faculty members
 #'
 #' @param   workload_type   Scalar character. Either "instructional" or "non_instructional".
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
+#'
 #' @export
 
 get_faculty_workload <- function(workload_type = c(
@@ -9,16 +10,10 @@ get_faculty_workload <- function(workload_type = c(
                                  ),
                                  dsn = "***REMOVED***") {
   workload_type <- match.arg(workload_type)
-  sql_names <- c(
-    "instructional" = "faculty_term_instructional_workload.sql",
-    "non_instructional" = "faculty_term_non_instructional_workload.sql"
-  )
-  sql_path <- system.file(
-    "sql", "faculty_workload", sql_names[workload_type],
-    package = "utPins"
-  )
-  workload <- utHelpR::get_data_from_sql_file(sql_path, dsn = dsn)
+  query_type <- paste0("faculty_term_", workload_type, "_workload")
+  sql_query <- get_query_string(query_type)
 
+  workload <- get_data_from_sql_query(sql_query, dsn = dsn)
   faculty_term <- get_faculty_term_df(dsn = dsn)
 
   dplyr::left_join(
@@ -30,14 +25,13 @@ get_faculty_workload <- function(workload_type = c(
 
 #' Get a data-frame containing faculty term data
 #'
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
+#'
 #' @export
 
 get_faculty_term_df <- function(dsn = "***REMOVED***") {
-  faculty_term <- utHelpR::get_data_from_sql_file(
-    system.file("sql", "faculty_workload", "faculty_term.sql", package = "utPins"),
-    dsn = dsn
-  )
+  sql_query <- get_query_string("faculty_term")
+  faculty_term <- get_data_from_sql_query(sql_query, dsn = dsn)
 
   format_faculty_term_df(faculty_term, utPins::contracted_workload)
 }
