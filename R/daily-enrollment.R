@@ -1,13 +1,11 @@
 #' Get a data-frame containing daily-enrollment data
 #'
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
 #'
 #' @export
 
 get_daily_enrollment <- function(dsn = "***REMOVED***") {
-  sql_file <- system.file(
-    "sql", "admissions", "daily_enrollment.sql",
-    package = "utPins", mustWork = TRUE
-  )
-  utHelpR::get_data_from_sql_file(sql_file, dsn = dsn)
+  query_string <- get_query_string("daily_enrollment")
+
+  get_data_from_sql_query(query_string, dsn = dsn)
 }
