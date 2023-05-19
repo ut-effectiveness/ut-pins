@@ -22,21 +22,27 @@ empty_named_list <- function() {
   l
 }
 
-x <- list()
-
 describe("the set of all UT pinnables", {
   it("can be created without error", {
     expect_silent(pinnables_fixture())
   })
   it("can be 'prepare'd without error (when SQL query is mocked)", {
+    # GIVEN: a list of pinnable objects
+    # AND: the SQL query for each of those pinnables is patched to return an empty data.frame
+    # (so no database access occurs here)
     pinnables <- pinnables_fixture()
-
     mockthat::local_mock(
       get_data_from_sql_query = function(...) data.frame()
     )
 
+    # WHEN: the data-preparation function for each pinnable is called
+    prepared_pinnables <- prepare_all(pinnables)
+
+    # THEN: no data-preparation errors occur
+    # (this indicates that a valid SQL-query file is found, and that valid arguments are passed to
+    # the data-preparation function from the pinnable)
     expect_equal(
-      prepare_all(pinnables)$error,
+      prepared_pinnables$error,
       empty_named_list()
     )
   })
