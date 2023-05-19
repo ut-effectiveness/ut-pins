@@ -37,7 +37,7 @@ get_data_steward_pinnables <- function(dsn = "***REMOVED***") {
     pinnable(
       name = paste0(x, "_validations"),
       prepare_fn = function() {
-        get_audit_report(audit_type = x, dsn = dsn)
+        get_data_steward_audit(audit_type = x, dsn = dsn)
       },
       cadence = "daily",
       subgroup = "data steward"
