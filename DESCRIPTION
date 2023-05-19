@@ -23,6 +23,7 @@ Imports:
     utHelpR (>= 0.0.0.9000)
 Suggests: 
     mockery,
+    mockthat,
     testthat,
     withr
 Depends: 
