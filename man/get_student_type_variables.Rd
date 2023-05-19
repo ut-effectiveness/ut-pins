@@ -9,6 +9,9 @@ get_student_type_variables(dsn = "***REMOVED***")
 \arguments{
 \item{dsn}{A DSN entry: \code{***REMOVED***}, \code{***REMOVED***}, \code{***REMOVED***}, \code{***REMOVED***}, etc...}
 }
+\value{
+A cleaned-up data.frame containing the student-type-determination-variables dataset.
+}
 \description{
 Get the variables used to determine student type
 }

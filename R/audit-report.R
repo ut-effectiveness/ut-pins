@@ -2,7 +2,7 @@
 #'
 #' @param   audit_type   Scalar character. The type of audit report to generate. Allowed values:
 #'   `students`, `courses`, `spbpers`, `sorhsch`, `goradid`, `student_courses`.
-#' @param   dsn   A DSN entry: `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, `***REMOVED***`, etc...
+#' @inheritParams   get_data_from_sql_query
 #' @export
 
 get_audit_report <- function(audit_type = c(
@@ -19,7 +19,9 @@ get_audit_report <- function(audit_type = c(
   sql_file <- system.file(
     "sql", "audit_reports", paste0(audit_type, ".sql", package = "utPins", mustWork = TRUE)
   )
-  utHelpR::get_data_from_sql_file(sql_file, dsn = dsn)
+  sql_query <- readr::read_file(sql_file)
+
+  get_data_from_sql_query(sql_query, dsn = dsn)
 }
 
 #' Add "audit_reports_" to the start of a string
