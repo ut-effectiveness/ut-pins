@@ -1,6 +1,6 @@
 Package: utPins
 Title: What the Package Does (One Line, Title Case)
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
@@ -23,6 +23,7 @@ Imports:
     utHelpR (>= 0.0.0.9000)
 Suggests: 
     mockery,
+    mockthat,
     testthat,
     withr
 Depends: 
