@@ -137,7 +137,7 @@ get_audit_report_pinnables <- function(dsn = "***REMOVED***") {
 get_faculty_workload_pinnables <- function(dsn = "***REMOVED***") {
   pins <- list()
 
-  daily_pinnable <- purrr::partial(pinnable, cadence = "daily", subgroup = "faculty_workload")
+  daily_pinnable <- purrr::partial(pinnable, cadence = "daily", subgroup = "faculty workload")
 
   pins$instructional_faculty_workload_pin <- daily_pinnable(
     name = "instructional_faculty_workload_pin",
