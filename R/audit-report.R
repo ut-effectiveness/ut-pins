@@ -16,8 +16,10 @@ get_audit_report <- function(audit_type = c(
                              dsn = "***REMOVED***") {
   audit_type <- match.arg(audit_type)
 
+  sql_basename <- paste0("audit_reports_", audit_type, ".sql")
   sql_file <- system.file(
-    "sql", "audit_reports", paste0(audit_type, ".sql", package = "utPins", mustWork = TRUE)
+    "sql", "audit_reports", sql_basename,
+    package = "utPins", mustWork = TRUE
   )
   sql_query <- readr::read_file(sql_file)
 
