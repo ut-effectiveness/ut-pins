@@ -1,7 +1,6 @@
 pinnables_fixture <- function() {
   # TODO:
-  # - include `get_student_type_pinnables`, `get_audit_report_pinnables` and
-  # `get_faculty_workload_pinnables` in this fixture
+  # - include `get_student_type_pinnables`, and `get_faculty_workload_pinnables` in this fixture
   # - these additional pinnables don't just use simple SQL queries, so will need additional mocked
   # functions
   c(
@@ -10,6 +9,7 @@ pinnables_fixture <- function() {
       weekly_test_pin = get_test_pinnable("weekly"),
       monthly_test_pin = get_test_pinnable("monthly")
     ),
+    get_audit_report_pinnables(),
     get_enrollment_pinnables(),
     get_data_steward_pinnables(),
     get_apr_pinnables()
