@@ -31,9 +31,9 @@ get_query_string <- function(query_type) {
   utpins_path <- function(...) system.file(..., package = "utPins", mustWork = TRUE)
 
   sql_files <- list(
-    daily_enrollment = utpins_path(
-      "sql", "admissions", "daily_enrollment.sql"
-    ),
+    # daily_enrollment = utpins_path(
+    #   "sql", "admissions", "daily_enrollment.sql"
+    # ),
     faculty_term = utpins_path(
       "sql", "faculty_workload", "faculty_term.sql"
     ),
