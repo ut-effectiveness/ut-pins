@@ -11,8 +11,7 @@ pinnables_fixture <- function() {
     ),
     get_audit_report_pinnables(),
     get_enrollment_pinnables(),
-    get_data_steward_pinnables(),
-    get_apr_pinnables()
+    get_data_steward_pinnables()
   )
 }
 
