@@ -1,19 +1,15 @@
 ---
-title: "Scheduled Pins (Daily)"
+title: "utPins-Scheduled Report (Daily)"
 author: ""
 date: ""
 output: html_document
 resource_files:
 - R/*
-- sql/*
+- inst/sql/*
 - data/*
 ---
 
 ```{r load_packages}
-```
-
-```{r load_functions}
-pkgload::load_all()
 ```
 
 ```{r setup_pins_environment}
