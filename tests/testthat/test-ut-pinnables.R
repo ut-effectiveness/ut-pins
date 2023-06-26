@@ -9,7 +9,6 @@ pinnables_fixture <- function() {
       weekly_test_pin = get_test_pinnable("weekly"),
       monthly_test_pin = get_test_pinnable("monthly")
     ),
-    get_audit_report_pinnables(),
     get_data_steward_pinnables()
   )
 }
