@@ -19,38 +19,6 @@ get_enrollment_pinnables <- function(dsn = "***REMOVED***") {
   pins
 }
 
-#' Get a list of `pinnable` objects whose data is used in the `DataStewardAudit` app
-#'
-#' @inheritParams   get_enrollment_pinnables
-#'
-#' @return   List of `pinnable`s.
-#'
-#' @export
-
-get_data_steward_pinnables <- function(dsn = "***REMOVED***") {
-  pins <- list()
-
-  ds_audit_types <- c("student", "student_course", "room", "graduation", "course", "building")
-  ds_audit_pins <- paste0(ds_audit_types, "_validations")
-
-  ds_audit_pin_fn <- function(x) {
-    pinnable(
-      name = paste0(x, "_validations"),
-      prepare_fn = function() {
-        get_data_steward_audit(audit_type = x, dsn = dsn)
-      },
-      cadence = "daily",
-      subgroup = "data steward"
-    )
-  }
-
-  pins[ds_audit_pins] <- ds_audit_types %>%
-    purrr::set_names(ds_audit_pins) %>%
-    purrr::map(ds_audit_pin_fn)
-
-  pins
-}
-
 #' Get a list of `pinnable` objects related to student types
 #'
 #' @param   parameter_term,term_two_terms_ago   Term string (e.g., "202320").
@@ -90,38 +58,6 @@ get_student_type_pinnables <- function(parameter_term,
     cadence = cadence,
     subgroup = subgroup
   )
-
-  pins
-}
-
-#' Get a list of `pinnable` objects related to audit reports
-#'
-#' @inheritParams   get_enrollment_pinnables
-#'
-#' @return   List of `pinnable`s.
-#'
-#' @export
-
-get_audit_report_pinnables <- function(dsn = "***REMOVED***") {
-  pins <- list()
-
-  audit_types <- c("students", "courses", "spbpers", "sorhsch", "goradid", "student_courses")
-  audit_reports <- as_audit_report_name(audit_types) # audit_reports_{x}
-
-  audit_pin_fn <- function(x) {
-    pinnable(
-      name = paste0(as_audit_report_name(x), "_pin"),
-      prepare_fn = function() {
-        get_audit_report(audit_type = x, dsn = dsn)
-      },
-      cadence = "daily",
-      subgroup = "audit report"
-    )
-  }
-
-  pins[audit_reports] <- audit_types %>%
-    purrr::set_names(audit_reports) %>%
-    purrr::map(audit_pin_fn)
 
   pins
 }
