@@ -1,3 +1,7 @@
+# utPins 0.2.0
+
+* Strip out server names, business logic and other private content from {utPins}
+
 # utPins 0.1.3
 
 * Renamed the subgroup for the faculty-workload pinnables to match the format used in the
