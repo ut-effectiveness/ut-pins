@@ -4,13 +4,16 @@
 \alias{publish.pinnable}
 \title{\code{publish()} method for pinnable objects}
 \usage{
-\method{publish}{pinnable}(x, pin_board, ...)
+\method{publish}{pinnable}(x, pin_board, pin_author = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{pinnable} object.}
 
 \item{pin_board}{A {pins} board object. This defines the location where the pin will be
 written.}
+
+\item{pin_author}{The name of the author of this pin, may differ from the name of the
+connect-account used to access the Connect board.}
 
 \item{...}{Other parameters. Unused here.}
 }

@@ -20,6 +20,9 @@ prepare_all <- function(pinnables) {
 #'
 #' @param   pinnables   A list of 'pinnable' objects
 #' @param   pin_board   A {pins} board where the pins should be written
+#' @param   pin_author   The name of the author of this pin, may differ from the name of the
+#'   connect-account used to access the Connect board. Assumed identical for all pins (if it isn't,
+#'   add the pin-author name to the "name" argument in `pinnable()`).
 #'
 #' @return   A list of two lists. The "result" entry contains all pins whose data was successfully
 #' pinned to the pin board. The "error" entry contains those pins which failed during the pin
@@ -27,11 +30,12 @@ prepare_all <- function(pinnables) {
 #'
 #' @export
 
-publish_all <- function(pinnables, pin_board) {
+publish_all <- function(pinnables, pin_board, pin_author = NULL) {
   purrr::map(
     pinnables,
     purrr::safely(publish),
-    pin_board = pin_board
+    pin_board = pin_board,
+    pin_author = pin_author
   ) %>%
     partition_successes()
 }

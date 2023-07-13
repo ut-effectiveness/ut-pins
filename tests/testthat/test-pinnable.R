@@ -67,6 +67,26 @@ describe("publish(pinnable)", {
       )
       expect_equal(stored_numbers, prepared_pin$data)
     })
+    it("writes to pin_author/pin_name if pin_author is provided", {
+      pin_author <- "my_username"
+      published_pin_name <- paste0(pin_author, "/", pin_name)
+      
+      mock_writer <- mockery::mock(TRUE)
+      mockery::stub(publish.pinnable, "pins::pin_write", mock_writer)
+      author_specific_pin <- publish(prepared_pin, pin_board, pin_author = pin_author)
+      
+      # We can't use author/name pins on a pins::board_temp, so we have to catch the arguments to
+      # pin_write instead.
+      # We just want to ensure that name == published_pin_name == pin_author/pin_name
+      mockery::expect_args(
+        mock_writer,
+        1,
+        board = pin_board,
+        x = prepared_pin$data,
+        name = published_pin_name,
+        type = prepared_pin$pin_type
+      )
+    })
   })
 
   it("throws an error if 'data' does not exist", {
