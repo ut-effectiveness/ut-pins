@@ -4,12 +4,16 @@
 \alias{publish_all}
 \title{Call 'publish' on each of a list of 'pinnable' objects}
 \usage{
-publish_all(pinnables, pin_board)
+publish_all(pinnables, pin_board, pin_author = NULL)
 }
 \arguments{
 \item{pinnables}{A list of 'pinnable' objects}
 
 \item{pin_board}{A {pins} board where the pins should be written}
+
+\item{pin_author}{The name of the author of this pin, may differ from the name of the
+connect-account used to access the Connect board. Assumed identical for all pins (if it isn't,
+add the pin-author name to the "name" argument in \code{pinnable()}).}
 }
 \value{
 A list of two lists. The "result" entry contains all pins whose data was successfully
