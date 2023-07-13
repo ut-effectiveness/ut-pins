@@ -99,17 +99,25 @@ publish.default <- function(x, ...) {
 #' @param   x   A `pinnable` object.
 #' @param   pin_board   A {pins} board object. This defines the location where the pin will be
 #'   written.
+#' @param   pin_author   The name of the author of this pin, may differ from the name of the
+#'   connect-account used to access the Connect board.
 #' @param   ...   Other parameters. Unused here.
 #'
 #' @export
 
-publish.pinnable <- function(x, pin_board, ...) {
+publish.pinnable <- function(x, pin_board, pin_author = NULL, ...) {
   assert_publishable(x)
+
+  pin_name <- if (!is.null(pin_author)) {
+    paste0(pin_author, "/", x$pin_name)
+  } else {
+    x$pin_name
+  }
 
   pin_path <- pins::pin_write(
     board = pin_board,
     x = x$data,
-    name = x$pin_name,
+    name = pin_name,
     type = x$pin_type
   )
 
@@ -123,13 +131,13 @@ publish.pinnable <- function(x, pin_board, ...) {
 #'
 #' @export
 
-publish.verbose_pinnable <- function(x, pin_board, ...) {
+publish.verbose_pinnable <- function(x, pin_board, pin_author = NULL, ...) {
   httr::with_verbose(
     data_out = TRUE,
     data_in = TRUE,
     info = TRUE,
     ssl = TRUE,
-    expr = publish.pinnable(x, pin_board)
+    expr = publish.pinnable(x, pin_board, pin_author = pin_author, ...)
   )
 }
 
