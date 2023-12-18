@@ -38,6 +38,26 @@ publish_all <- function(pinnables, pin_board, pin_author = NULL) {
   )
 }
 
+#' Call `pin_versions_prune` on each of a list of 'pinnable' objects
+#' 
+#' @inheritParams   publish_all
+#' @inheritParams   pins::pin_versions_prune
+#' @param   pin_board   A {pins} board where the pins are (may be) published.
+#' 
+#' @export
+
+prune_all <- function(pinnables, pin_board, pin_author = NULL, n = NULL, days = NULL, ...) {
+  map_safely(
+    pinnables,
+    prune,
+    pin_board = pin_board,
+    pin_author = pin_author,
+    n = n,
+    days = days,
+    ...
+  )
+}
+
 #' Map a function over a collection, using `purrr::safely` to catch any errors
 #'
 #' @inheritParams   purrr::map
