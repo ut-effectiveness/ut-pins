@@ -2,6 +2,8 @@
 
 S3method(prepare,default)
 S3method(prepare,pinnable)
+S3method(prune,default)
+S3method(prune,pinnable)
 S3method(publish,default)
 S3method(publish,pinnable)
 S3method(publish,verbose_pinnable)

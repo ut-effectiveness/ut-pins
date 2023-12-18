@@ -1,3 +1,5 @@
+# Prepare -------------------------------------------------------------------------------------
+
 #' Prepare a dataset for publication to pins
 #'
 #' @param   x   An object to be published. Typically a `pinnable` object for writing a pin to a
@@ -21,6 +23,8 @@ prepare.pinnable <- function(x) {
 
   return(x)
 }
+
+# Publish -------------------------------------------------------------------------------------
 
 #' Write a pinnable dataset to a pins board
 #'
@@ -79,5 +83,46 @@ publish.verbose_pinnable <- function(x, pin_board, pin_author = NULL, ...) {
     info = TRUE,
     ssl = TRUE,
     expr = publish.pinnable(x, pin_board, pin_author = pin_author, ...)
+  )
+}
+
+# Prune ---------------------------------------------------------------------------------------
+
+#' Write a pinnable dataset to a pins board
+#'
+#' @param   x   Typically a `pinnable` object for a pin that has been written to a pins board.
+#' @param   ...  Other arguments defining where the object should be published. Use
+#'   `pin_board = the_board` to define the {pins} board where pins were written.
+#'
+#' @export
+
+prune <- function(x, ...) {
+  UseMethod("prune")
+}
+
+#' @export
+prune.default <- function(x, ...) {
+  stop("Default prune method is unimplemented")
+}
+
+#' `prune()` method for pinnable objects
+#' @param   x   A `pinnable` object.
+#' @param   pin_board   A {pins} board object. This defines the location where the pin was
+#'   written.
+#' @param   pin_author   The name of the author of this pin, may differ from the name of the
+#'   connect-account used to access the Connect board.
+#' @inheritParams   pins::pin_versions_prune
+#'
+#' @export
+
+prune.pinnable <- function(x, pin_board, pin_author = NULL, n = NULL, days = NULL, ...) {
+  pin_name <- full_pin_name(x$pin_name, pin_author)
+  
+  pins::pin_versions_prune(
+    board = pin_board,
+    name = pin_name,
+    n = n,
+    days = days,
+    ...
   )
 }
