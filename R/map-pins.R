@@ -9,11 +9,10 @@
 #' @export
 
 prepare_all <- function(pinnables) {
-  purrr::map(
+  map_safely(
     pinnables,
-    purrr::safely(prepare)
-  ) %>%
-    partition_successes()
+    prepare
+  )
 }
 
 #' Call 'publish' on each of a list of 'pinnable' objects
@@ -31,11 +30,26 @@ prepare_all <- function(pinnables) {
 #' @export
 
 publish_all <- function(pinnables, pin_board, pin_author = NULL) {
-  purrr::map(
+  map_safely(
     pinnables,
-    purrr::safely(publish),
+    publish,
     pin_board = pin_board,
     pin_author = pin_author
+  )
+}
+
+#' Map a function over a collection, using `purrr::safely` to catch any errors
+#'
+#' @inheritParams   purrr::map
+#'
+#' @return   A list of two lists. The "result" entry contains all results from running the function
+#'   `.f` without error. The "error" entry contains any failures.
+
+map_safely <- function(.x, .f, ...) {
+  purrr::map(
+    .x,
+    purrr::safely(.f),
+    ...
   ) %>%
     partition_successes()
 }
