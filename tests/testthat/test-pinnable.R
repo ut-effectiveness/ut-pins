@@ -164,3 +164,18 @@ describe("assert_publishable", {
     expect_error(assert_publishable(no_name))
   })
 })
+
+describe("full_pin_name", {
+  it("returns the input pin-name, if no pin-author provided", {
+    expect_equal(
+      full_pin_name("myPin"),
+      "myPin"
+    )
+  })
+  it("prepends pin-author (when provided) to pin-name", {
+    expect_equal(
+      full_pin_name("pinMe", "myAccount"),
+      "myAccount/pinMe"
+    )
+  })
+})
