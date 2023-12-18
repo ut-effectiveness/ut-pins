@@ -1,3 +1,8 @@
+# utPins 0.2.2
+
+* Add a `prune_all()` function and `prune()` method for pruning the number of copies of a given pin
+  that are stored on a pins board.
+
 # utPins 0.2.1
 
 * Add an optional `pin_author` argument to `publish()` and `publish_all()` so that one Connect
