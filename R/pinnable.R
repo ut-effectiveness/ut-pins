@@ -108,11 +108,7 @@ publish.default <- function(x, ...) {
 publish.pinnable <- function(x, pin_board, pin_author = NULL, ...) {
   assert_publishable(x)
 
-  pin_name <- if (!is.null(pin_author)) {
-    paste0(pin_author, "/", x$pin_name)
-  } else {
-    x$pin_name
-  }
+  pin_name <- full_pin_name(x$pin_name, pin_author)
 
   pin_path <- pins::pin_write(
     board = pin_board,
@@ -163,4 +159,20 @@ assert_publishable <- function(x) {
   stopifnot(inherits(x, "pinnable"))
   stopifnot("data" %in% names(x))
   stopifnot("pin_name" %in% names(x) && !is.null(x$pin_name))
+}
+
+#' Generate the pin-name as used on Connect (ie, "{pin_author}/{pin_name}")
+#' 
+#' If `pin_author` is NULL, then the full pin name matches the input `pin_name`. Otherwise, the
+#' fully-specified pin-name is `{pin_author}/{pin_name}`.
+#' 
+#' @param   pin_name   Scalar character. The name of the pin.
+#' @param   pin_author   Scalar character (or NULL). The author of the pin.
+
+full_pin_name <- function(pin_name, pin_author = NULL) {
+ if (!is.null(pin_author)) {
+    paste0(pin_author, "/", pin_name)
+  } else {
+    pin_name
+  } 
 }
